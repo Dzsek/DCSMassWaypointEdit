@@ -2,7 +2,9 @@ This little program will copy the waypoints set on one specific group in the mis
 Make sure you create a backup of your mission file before running it. There is no guarantee that it works flawlessly, so better to be safe than sorry.
 
 Requirements
+
 Lua for windows: https://github.com/rjpcomputing/luaforwindows/releases
+
 .NET runtime: https://dotnet.microsoft.com/en-us/download
 
 Step 1.
