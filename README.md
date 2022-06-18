@@ -5,7 +5,7 @@ Requirements
 
 Lua for windows: https://github.com/rjpcomputing/luaforwindows/releases
 
-.NET runtime: https://dotnet.microsoft.com/en-us/download
+.NET runtime 6.0: https://dotnet.microsoft.com/en-us/download
 
 Step 1.
 Add any plane to your mission and set its GROUP name to "route-template-blue", "route-template-red" or "route-template-neutrals" without the quotes, 
