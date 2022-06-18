@@ -63,35 +63,35 @@ function saveTable(filename, variablename, data)
 	File:close()
 end
 
-
+function updateRoute(route, groups)
+	for _,group in ipairs(groups) do
+		if isClient(group.units) then
+			print("Updating "..group.name)
+			copyRoute(route.points, group.route.points)
+		end
+	end
+end
 
 
 dofile('mission')
-local countries = mission.coalition.blue.country
-templateGroup = "route-template-group"
 
-local route = getRouteFromGroup(templateGroup, countries)
+for coalition,_ in pairs(mission.coalition) do
+	local countries = mission.coalition[coalition].country
+	templateGroup = "route-template-"..coalition
 
-if not route then 
-	print("No group named 'route-template-group' found to copy waypoints from")
-	os.exit()
-end
+	local route = getRouteFromGroup(templateGroup, countries)
 
-for _,country in ipairs(countries) do
-	if country.plane and country.plane.group then
-		for _,group in ipairs(country.plane.group) do
-			if isClient(group.units) then
-				print(group.name)
-				copyRoute(route.points, group.route.points)
+	if not route then 
+		print("\nNo group named '"..templateGroup.."' found to copy waypoints from. Skipping coalition")
+	else
+		print("\nCopying '"..templateGroup.."'")
+		for _,country in ipairs(countries) do
+			if country.plane and country.plane.group then
+				updateRoute(route, country.plane.group)
 			end
-		end
-	end
 
-	if country.helicopter and country.helicopter.group then
-		for _,group in ipairs(country.helicopter.group) do
-			if isClient(group.units) then
-				print(group.name)
-				copyRoute(route.points, group.route.points)
+			if country.helicopter and country.helicopter.group then
+				updateRoute(route, country.helicopter.group)
 			end
 		end
 	end
