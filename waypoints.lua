@@ -1,3 +1,5 @@
+require("utils")
+
 function isClient(units)
 	for _,unit in ipairs(units) do
 		if unit.skill == "Client" then
@@ -7,7 +9,6 @@ function isClient(units)
 
 	return false
 end
-
 
 function getRouteFromGroup(groupname, countries)
 
@@ -20,7 +21,6 @@ function getRouteFromGroup(groupname, countries)
 			end
 		end
 	end
-
 end
 
 function copyRoute(source, destination)
@@ -29,38 +29,6 @@ function copyRoute(source, destination)
 			destination[i] = v
 		end
 	end
-end
-
-function serializeValue(value)
-	local res = ''
-	if type(value)=='number' or type(value)=='boolean' then
-		res = res..tostring(value)
-	elseif type(value)=='string' then
-		res = res..'"'..value:gsub("\\","\\\\"):gsub("\n","\\\n"):gsub("\"","\\\"")..'"'
-	elseif type(value)=='table' then
-		res = res..'{ '
-		for i,v in pairs(value) do
-			if type(i)=='number' then
-				res = res..'['..i..']='..serializeValue(v)..','
-			else
-				res = res..'[\''..i..'\']='..serializeValue(v)..','
-			end
-		end
-		res = res:sub(1,-2)
-		res = res..' }'
-	end
-	return res
-end
-
-function saveTable(filename, variablename, data)
-	local str = variablename..' = {}'
-	for i,v in pairs(data) do
-		str = str..'\n'..variablename..'["'..i..'"] = '..serializeValue(v)
-	end
-
-	File = io.open(filename, "w")
-	File:write(str)
-	File:close()
 end
 
 function updateRoute(route, groups)
@@ -72,8 +40,7 @@ function updateRoute(route, groups)
 	end
 end
 
-
-dofile('mission')
+dofile(arg[1])
 
 for coalition,_ in pairs(mission.coalition) do
 	local countries = mission.coalition[coalition].country
@@ -97,4 +64,4 @@ for coalition,_ in pairs(mission.coalition) do
 	end
 end
 
-saveTable('mission2', 'mission', mission)
+utils.saveTable(arg[2], 'mission', mission)

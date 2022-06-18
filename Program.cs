@@ -28,15 +28,15 @@ namespace MassWaypointEdit
 
                 var process = new Process();
                 process.StartInfo.FileName = "lua.exe";
-                process.StartInfo.Arguments = "waypoints.lua";
+                process.StartInfo.Arguments = "waypoints.lua mission mission_out";
                 process.Start();
 
                 process.WaitForExit();
 
-                if (File.Exists("mission2"))
+                if (File.Exists("mission_out"))
                 {
                     mission.Delete();
-                    zip.CreateEntryFromFile("mission2", "mission");
+                    zip.CreateEntryFromFile("mission_out", "mission");
                     zip.Dispose();
 
                     Console.WriteLine();
@@ -44,7 +44,7 @@ namespace MassWaypointEdit
                 }
 
                 File.Delete("mission");
-                File.Delete("mission2");
+                File.Delete("mission_out");
                 Console.ReadLine();
             }
             catch (Exception ex)
