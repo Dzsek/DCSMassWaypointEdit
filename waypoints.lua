@@ -10,6 +10,18 @@ function isClient(units)
 	return false
 end
 
+function shouldSkip(units)
+	if not ignore then return false end
+
+	for _,unit in ipairs(units) do
+		if ignore[unit.type] then
+			return true
+		end
+	end
+
+	return false
+end
+
 function getRouteFromGroup(groupname, countries)
 
 	for _,country in ipairs(countries) do
@@ -33,14 +45,16 @@ end
 
 function updateRoute(route, groups)
 	for _,group in ipairs(groups) do
-		if isClient(group.units) then
-			print("Updating "..group.name)
+		if isClient(group.units) and not shouldSkip(group.units) then
+			print("Updating "..group.name.." ["..group.units[1].type.."]")
 			copyRoute(route.points, group.route.points)
 		end
 	end
 end
 
 dofile(arg[1])
+
+dofile('ignore.lua')
 
 for coalition,_ in pairs(mission.coalition) do
 	local countries = mission.coalition[coalition].country

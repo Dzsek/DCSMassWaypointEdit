@@ -25,3 +25,8 @@ Once its done copy the .miz file back into your dcs missions folder, careful not
 Step 5.
 Open the mission in the editor. All groups that were set to client should now have the new waypoints.
 You can now safely remove the "route-template-group" group from your mission.
+
+
+Other:
+
+Exclude certain module types from being updated by editing the file named "ignore.lua" and changing the values to true if the module is to be skipped, or false if it should be updated.
