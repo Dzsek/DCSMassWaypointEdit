@@ -47,6 +47,7 @@ function updateRoute(route, groups)
 	for _,group in ipairs(groups) do
 		if isClient(group.units) and not shouldSkip(group.units) then
 			print("Updating "..group.name.." ["..group.units[1].type.."]")
+			group.route.points = { group.route.points[1] }
 			copyRoute(route.points, group.route.points)
 		end
 	end
