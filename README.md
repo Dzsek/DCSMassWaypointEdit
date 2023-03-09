@@ -8,7 +8,7 @@ Lua for windows: https://github.com/rjpcomputing/luaforwindows/releases
 .NET runtime 6.0: https://dotnet.microsoft.com/en-us/download
 
 Step 1.
-Add any plane to your mission and set its GROUP name to "route-template-blue", "route-template-red" or "route-template-neutrals" without the quotes, 
+Add any plane to your mission and make sure its skill is NOT set to Client or Player and set its GROUP name to "route-template-blue", "route-template-red" or "route-template-neutrals" without the quotes, 
 create waypoints for it as you'd like and save the mission.
 You can have one template group per each coalition.
 
