@@ -30,5 +30,3 @@ You can now safely remove the "route-template-group" group from your mission.
 Other:
 
 Exclude certain module types from being updated by editing the file named "ignore.lua" and changing the values to true if the module is to be skipped, or false if it should be updated.
-
-If you like my work, and would like to support development, feel free to [buy me a beer](https://www.buymeacoffee.com/dzsek).
